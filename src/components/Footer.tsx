@@ -1,4 +1,4 @@
-import { MessageCircle, Phone, Mail, MapPin, ArrowRight } from 'lucide-react'
+import { MessageCircle, Phone, Mail, MapPin, ArrowRight, Instagram } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 export function Footer() {
@@ -32,13 +32,24 @@ export function Footer() {
               <p className="text-background/80 text-lg leading-relaxed mb-8 max-w-md">
                 {t('footer.description')}
               </p>
-              <button
-                onClick={handleWhatsAppClick}
-                className={`bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-lg gentle-animation inline-flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}
-              >
-                <MessageCircle className="w-5 h-5" />
-                <span>{isRTL ? 'تواصل معنا' : 'Get in Touch'}</span>
-              </button>
+              <div className={`flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <button
+                  onClick={handleWhatsAppClick}
+                  className={`bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-lg gentle-animation inline-flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  <span>{isRTL ? 'تواصل معنا' : 'Get in Touch'}</span>
+                </button>
+                <a
+                  href="https://instagram.com/royah.om"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-background/10 hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 rounded-lg flex items-center justify-center gentle-animation group"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="w-5 h-5 text-background/70 group-hover:text-white" />
+                </a>
+              </div>
             </div>
 
             {/* Quick Links */}
