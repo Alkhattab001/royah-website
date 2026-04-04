@@ -1,5 +1,3 @@
-'use client'
-
 import { MessageCircle, Phone, Mail, MapPin, ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 

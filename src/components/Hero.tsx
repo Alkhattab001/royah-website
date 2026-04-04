@@ -1,5 +1,3 @@
-'use client'
-
 import { motion } from 'framer-motion'
 import { Volume2, VolumeX, Menu, X, Globe } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
@@ -28,34 +26,18 @@ export function Hero() {
   // Ensure video is muted immediately on load to prevent any audio
   useEffect(() => {
     if (videoRef.current) {
-      console.log('Video element found, setting up...')
       videoRef.current.volume = 0
       videoRef.current.muted = true
       videoRef.current.defaultMuted = true
-      
-      // Add event listeners for debugging
-      videoRef.current.addEventListener('loadstart', () => console.log('Video: loadstart'))
-      videoRef.current.addEventListener('loadedmetadata', () => console.log('Video: loadedmetadata'))
-      videoRef.current.addEventListener('canplay', () => console.log('Video: canplay'))
-      videoRef.current.addEventListener('playing', () => console.log('Video: playing'))
-      videoRef.current.addEventListener('error', (e) => console.error('Video error:', e))
-      
-      // Force mute on play
+
       videoRef.current.addEventListener('play', () => {
         if (videoRef.current) {
-          console.log('Video play event fired')
           videoRef.current.muted = isMuted
           videoRef.current.volume = isMuted ? 0 : 0.7
         }
       })
-      
-      // Try to play the video
-      const playPromise = videoRef.current.play()
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => console.log('Video autoplay successful'))
-          .catch(error => console.error('Video autoplay failed:', error))
-      }
+
+      videoRef.current.play().catch(() => {})
     }
   }, [])
 
@@ -110,9 +92,10 @@ export function Hero() {
         muted
         loop
         playsInline
+        preload="auto"
       >
-        <source src="https://videos.pexels.com/video-files/3130284/3130284-uhd_2560_1440_30fps.mp4" type="video/mp4" />
         <source src="https://videos.pexels.com/video-files/6963744/6963744-hd_1920_1080_25fps.mp4" type="video/mp4" />
+        <source src="https://videos.pexels.com/video-files/3130284/3130284-uhd_2560_1440_30fps.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 

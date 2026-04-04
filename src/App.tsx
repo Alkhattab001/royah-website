@@ -12,13 +12,13 @@ export default function App() {
         <section id="hero" aria-label="Hero section">
           <Hero />
         </section>
-        <section id="portfolio" aria-label="Portfolio section">
+        <section id="services" aria-label="Services section">
           <Portfolio />
         </section>
-        <section id="about" aria-label="About section">
+        <section id="about" aria-label="Process section">
           <About />
         </section>
-        <section id="services" aria-label="Services section">
+        <section id="portfolio" aria-label="Extended services section">
           <Services />
         </section>
         <section id="contact" aria-label="Contact section">

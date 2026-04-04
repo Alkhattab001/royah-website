@@ -1,4 +1,4 @@
-'use client'
+
 
 import { Star, Quote, MapPin, Building } from 'lucide-react'
 import { useTranslation } from 'react-i18next'

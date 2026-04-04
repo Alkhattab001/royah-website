@@ -1,5 +1,3 @@
-'use client'
-
 import { Brain, Workflow, Target, ArrowRight } from 'lucide-react'
 import { Button } from './ui/button'
 import { useTranslation } from 'react-i18next'
@@ -13,26 +11,32 @@ export function Portfolio() {
       titleKey: "services.items.digitalStrategy.title",
       descriptionKey: "services.items.digitalStrategy.description",
       featuresKey: "services.items.digitalStrategy.features",
-      color: "accent-blue"
+      iconBg: "bg-accent-blue/10",
+      iconColor: "text-accent-blue",
+      dotColor: "bg-accent-blue"
     },
     {
       icon: Workflow,
       titleKey: "services.items.automation.title",
       descriptionKey: "services.items.automation.description",
       featuresKey: "services.items.automation.features",
-      color: "accent-emerald"
+      iconBg: "bg-accent-emerald/10",
+      iconColor: "text-accent-emerald",
+      dotColor: "bg-accent-emerald"
     },
     {
       icon: Brain,
       titleKey: "services.items.ai.title",
       descriptionKey: "services.items.ai.description",
       featuresKey: "services.items.ai.features",
-      color: "accent-purple"
+      iconBg: "bg-accent-purple/10",
+      iconColor: "text-accent-purple",
+      dotColor: "bg-accent-purple"
     }
   ]
 
   return (
-    <section id="services" className="relative py-32 bg-background">
+    <section className="relative py-32 bg-background">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
         {/* Section Header */}
         <div className="text-center mb-20">
@@ -70,8 +74,8 @@ export function Portfolio() {
                 <div className="p-8 lg:p-10">
                   <div className="flex-1">
                     <div className="flex items-center gap-4 mb-6">
-                      <div className={`w-12 h-12 bg-${service.color}/10 rounded-xl flex items-center justify-center`}>
-                        <IconComponent className={`w-6 h-6 text-${service.color}`} />
+                      <div className={`w-12 h-12 ${service.iconBg} rounded-xl flex items-center justify-center`}>
+                        <IconComponent className={`w-6 h-6 ${service.iconColor}`} />
                       </div>
                     </div>
 
@@ -86,7 +90,7 @@ export function Portfolio() {
                     <div className="space-y-2">
                       {t(service.featuresKey, { returnObjects: true }).map((feature: string, featureIndex: number) => (
                         <div key={featureIndex} className="flex items-center gap-2">
-                          <div className={`w-2 h-2 bg-${service.color} rounded-full`} />
+                          <div className={`w-2 h-2 ${service.dotColor} rounded-full`} />
                           <span className="text-sm font-medium">{feature}</span>
                         </div>
                       ))}

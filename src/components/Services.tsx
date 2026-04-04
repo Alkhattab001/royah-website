@@ -1,5 +1,3 @@
-'use client'
-
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ImageWithFallback } from './figma/ImageWithFallback'
@@ -66,7 +64,7 @@ export function Services() {
   }, [])
 
   return (
-    <section id="services" className="relative py-20" style={{
+    <section className="relative py-20" style={{
       background: 'linear-gradient(135deg, #2d1810 0%, #1a0f08 30%, #0f0704 60%, #1a0f08 100%)',
       overflow: 'visible'
     }}>

@@ -1,4 +1,4 @@
-'use client'
+
 
 import { useEffect, useState } from 'react'
 import minimalBestFilm from '../assets/minimal-best-film.png'

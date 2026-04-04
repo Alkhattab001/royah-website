@@ -1,5 +1,3 @@
-'use client'
-
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -14,31 +12,31 @@ export function About() {
       number: "01",
       titleKey: "process.steps.discovery.title",
       descriptionKey: "process.steps.discovery.description",
-      color: "accent-blue"
+      borderActive: "border-accent-blue"
     },
     {
       number: "02",
       titleKey: "process.steps.strategy.title",
       descriptionKey: "process.steps.strategy.description",
-      color: "accent-emerald"
+      borderActive: "border-accent-emerald"
     },
     {
       number: "03",
       titleKey: "process.steps.development.title",
       descriptionKey: "process.steps.development.description",
-      color: "accent-purple"
+      borderActive: "border-accent-purple"
     },
     {
       number: "04",
       titleKey: "process.steps.testing.title",
       descriptionKey: "process.steps.testing.description",
-      color: "accent-blue"
+      borderActive: "border-accent-blue"
     },
     {
       number: "05",
       titleKey: "process.steps.launch.title",
       descriptionKey: "process.steps.launch.description",
-      color: "accent-purple"
+      borderActive: "border-accent-purple"
     }
   ]
 
@@ -56,7 +54,7 @@ export function About() {
   }, [])
 
   return (
-    <section id="about" className="relative py-20 bg-background overflow-hidden">
+    <section className="relative py-20 bg-background overflow-hidden">
       
       {/* Cinematic Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card/20 to-background" />
@@ -152,8 +150,8 @@ export function About() {
                   <div
                     key={step.number}
                     className={`flex-shrink-0 w-80 h-52 bg-background rounded-lg border-4 ${
-                      activeFrame >= index 
-                        ? `border-${step.color}` 
+                      activeFrame >= index
+                        ? step.borderActive
                         : 'border-gray-600'
                     }`}
                     style={{
@@ -211,8 +209,8 @@ export function About() {
                   <div
                     key={`duplicate-${step.number}`}
                     className={`flex-shrink-0 w-80 h-52 bg-background rounded-lg border-4 ${
-                      activeFrame >= index 
-                        ? `border-${step.color}` 
+                      activeFrame >= index
+                        ? step.borderActive
                         : 'border-gray-600'
                     }`}
                     style={{
