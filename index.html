@@ -9,6 +9,18 @@
     <link rel="alternate" hreflang="en" href="https://royah.om/" />
     <link rel="alternate" hreflang="ar" href="https://royah.om/ar" />
     <link rel="alternate" hreflang="x-default" href="https://royah.om/" />
+    <script>
+      if (window.location.pathname.startsWith('/ar')) {
+        document.documentElement.lang = 'ar';
+        document.documentElement.dir = 'rtl';
+        document.title = 'رؤية - استشارات الاستراتيجية الرقمية والذكاء الاصطناعي';
+        document.querySelector('meta[name="description"]').content = 'حوّل أعمالك مع خدمات رؤية للاستشارات الاستراتيجية الرقمية وأتمتة العمليات وتكامل الذكاء الاصطناعي. نخدم العملاء في منطقة الخليج.';
+        document.querySelector('link[rel="canonical"]').href = 'https://royah.om/ar';
+        document.querySelector('meta[property="og:url"]').content = 'https://royah.om/ar';
+        document.querySelector('meta[property="og:title"]').content = 'رؤية - استشارات الاستراتيجية الرقمية والذكاء الاصطناعي';
+        document.querySelector('meta[property="og:locale"]').content = 'ar_OM';
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet">
@@ -17,6 +29,7 @@
     
     <meta property="og:type" content="website" />
     <link rel="canonical" href="https://royah.om/" />
+    <!-- Canonical is dynamically updated to /ar by the script above when on Arabic page -->
     <meta property="og:url" content="https://royah.om/" />
     <meta property="og:updated_time" content="2026-04-01T12:00:00+00:00" />
     <meta property="og:image" content="https://royah.om/royah-og-image.png">
