@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Tajawal:wght@400;500;700;800&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,36 +7,44 @@
 
 :root {
   --font-size: 16px;
-  --background: #ffffff;
-  --foreground: #0a0a0a;
-  --card: #fafafa;
-  --card-foreground: #0a0a0a;
-  --popover: #ffffff;
-  --popover-foreground: #0a0a0a;
-  --primary: #DB4B4B;
-  --primary-foreground: #ffffff;
-  --secondary: #f4f4f5;
-  --secondary-foreground: #0a0a0a;
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
-  --accent: #f4f4f5;
-  --accent-foreground: #0a0a0a;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #e4e4e7;
-  --input: #f4f4f5;
-  --input-background: #ffffff;
-  --switch-background: #e4e4e7;
+
+  /* Royah — Claude-inspired warm palette */
+  --background: #FAF7F2;            /* warm cream */
+  --foreground: #1A1814;            /* deep warm black */
+  --card: #FFFFFF;
+  --card-foreground: #1A1814;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1814;
+  --primary: #C2410C;               /* terracotta — earthy Omani */
+  --primary-foreground: #FAF7F2;
+  --secondary: #F0EBE2;             /* soft beige */
+  --secondary-foreground: #1A1814;
+  --muted: #F0EBE2;
+  --muted-foreground: #6B6358;      /* muted brown-gray */
+  --accent: #2D5A3D;                /* deep sage — growth */
+  --accent-foreground: #FAF7F2;
+  --destructive: #B91C1C;
+  --destructive-foreground: #FAF7F2;
+  --border: #E5DFD3;                /* warm border */
+  --input: #F0EBE2;
+  --input-background: #FFFFFF;
+  --switch-background: #E5DFD3;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: #a1a1aa;
-  
-  /* Royah brand accent colors */
-  --accent-blue: #DB4B4B;
-  --accent-emerald: #059669;
-  --accent-purple: #8B5A7F;
-  
-  --radius: 0.75rem;
+  --ring: #C2410C;
+
+  /* Legacy aliases (kept so old components don't break during migration) */
+  --accent-blue: #C2410C;
+  --accent-emerald: #2D5A3D;
+  --accent-purple: #6B6358;
+
+  --radius: 0.5rem;
+
+  /* Type system */
+  --font-arabic-display: 'Reem Kufi', 'Tajawal', sans-serif;
+  --font-arabic-body: 'Tajawal', 'Reem Kufi', sans-serif;
+  --font-english-display: 'Instrument Serif', serif;
+  --font-english-body: 'Inter', system-ui, sans-serif;
 }
 
 .dark {

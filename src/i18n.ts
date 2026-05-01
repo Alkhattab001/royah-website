@@ -2,402 +2,184 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-// Translation resources
 const resources = {
   en: {
     translation: {
-      // Navigation
       nav: {
-        services: "Services",
-        process: "Process",
-        whyUs: "Why Us",
-        about: "About",
-        contact: "Contact"
+        howWeHelp: 'How We Help',
+        meeting: 'The Meeting',
+        howWeWork: 'How We Work',
+        whyRoyah: 'Why Royah',
+        bookCta: 'Book a Meeting',
       },
-      // Hero Section
       hero: {
-        tagline: "Digital Strategy & Technology Consulting",
-        headline: "Your Partner in Digital Growth",
-        subheadline: "We help you plan your digital journey, automate your processes, and build AI solutions that grow with your business.",
-        cta: {
-          primary: "Start a Project",
-          secondary: "See Our Services"
-        },
-        stats: {
-          projects: "Projects",
-          satisfaction: "Satisfaction",
-          support: "Support"
-        },
-        controls: {
-          soundOn: "Sound On",
-          soundOff: "Sound Off"
-        }
+        headline: 'Your Partner in Digital Transformation',
+        subheadline:
+          'We help businesses in Oman build smart systems, automate operations, and integrate AI in practical, considered ways.',
+        cta: 'Book a Free 30-Min Meeting',
+        languageToggle: 'العربية',
       },
-      // Services Section
-      services: {
-        title: "Technology that Solves Real Problems",
-        subtitle: "We help businesses plan their digital journey, automate processes, and build smart AI solutions that grow with your business.",
-        coreService: "Core Service",
-        learnMore: "Learn More",
+      capabilities: {
+        eyebrow: 'How We Help',
+        title: 'Five capabilities, one partnership',
+        subtitle:
+          'We adapt to your business — whether you are starting fresh or moving to a new chapter.',
         items: {
-          digitalStrategy: {
-            title: "Digital Strategy",
-            description: "Not sure where to start? We help you create a clear digital roadmap. What to build, when to build it, and how.",
-            features: ["Digital Roadmap", "Tech Assessment", "System Planning", "Growth Strategy"]
-          },
-          automation: {
-            title: "Process Automation",
-            description: "Stop wasting time on repetitive tasks. We automate your workflows so your team can focus on real work.",
-            features: ["Workflow Automation", "App Integration", "Auto Reports", "Custom Tools"]
+          digital: {
+            title: 'Digital Transformation',
+            desc: 'Transform your business from manual operations into a unified, intelligent platform that supports growth.',
           },
           ai: {
-            title: "AI Solutions",
-            description: "AI that actually works for your business. Chatbots, smart search, data insights, and more.",
-            features: ["AI Chatbots", "Data Analysis", "Smart Search", "Predictions"]
-          }
-        }
-      },
-      // Process Section
-      process: {
-        title: "How We Build Solutions",
-        subtitle: "Watch our proven process unfold step by step",
-        steps: {
-          discovery: {
-            title: "Discovery & Analysis",
-            description: "Deep dive into your business goals and technical needs"
+            title: 'AI Solutions',
+            desc: 'Smart assistants, conversational automation, and intelligent data analysis.',
           },
-          strategy: {
-            title: "Strategy & Planning",
-            description: "Create detailed roadmap and project specifications"
-          },
-          development: {
-            title: "Development & Build",
-            description: "Build solutions using proven technologies and frameworks"
-          },
-          testing: {
-            title: "Testing & Integration",
-            description: "Quality assurance and seamless system integration"
-          },
-          launch: {
-            title: "Launch & Support",
-            description: "Go-live with ongoing maintenance and optimization"
-          }
-        },
-        controls: {
-          methodology: "Proven Methodology",
-          timeline: "1-2 Weeks",
-          quality: "Enterprise Grade"
-        }
-      },
-      // Team/Testimonials Section
-      team: {
-        title: "What Our Clients Say About Us",
-        subtitle: "Real results from real businesses across the region"
-      },
-      // Contact Section
-      contact: {
-        tagline: "Start Your Digital Journey",
-        title: "Ready to Transform Your Business?",
-        subtitle: "Connect with us to discuss your digital strategy and discover how we can help you achieve your business goals",
-        whatsapp: "Chat on WhatsApp",
-        whatsappDesc: "Get instant responses to your questions. We're available during business hours.",
-        whatsappResponse: "Usually responds instantly",
-        email: "Send us an Email",
-        emailDesc: "Detailed project inquiries and formal communication.",
-        phone: "Call Us",
-        phoneDesc: "Speak directly with our team for urgent matters.",
-        bookCall: "Book a Call",
-        bookCallDesc: "Schedule a free consultation to discuss your project in detail.",
-        bookCallResponse: "30-minute free consultation",
-        hours: "Business Hours",
-        location: "Our Location",
-        businessHours: {
-          weekdays: "Sunday - Thursday:",
-          weekdaysTime: "9:00 AM - 6:00 PM",
-          weekend: "Friday - Saturday:",
-          weekendTime: "Closed",
-          timezone: "GMT+4 (Oman Time)"
-        },
-        locationDetails: {
-          city: "Muscat, Sultanate of Oman",
-          region: "Serving clients across the GCC",
-          remote: "Remote consultations available"
-        },
-        cta: {
-          title: "Ready to Start Your Digital Transformation?",
-          description: "Join hundreds of businesses who have trusted Royah to deliver exceptional digital solutions. Let's discuss your project today.",
-          button: "Start WhatsApp Conversation"
-        }
-      },
-      // Extended Services
-      extendedServices: {
-        title: "Technology Solutions",
-        subtitle: "Built with expertise, delivered with excellence",
-        description: "Every solution is carefully crafted in our development lab, ensuring each detail delivers the performance and reliability your business demands.",
-        items: {
-          webDevelopment: {
-            title: "Web Development",
-            description: "Custom websites and web applications built with modern technologies for maximum performance."
-          },
-          aiIntegration: {
-            title: "AI Integration",
-            description: "Smart AI solutions including chatbots, data analysis, and predictive systems for your business."
+          systems: {
+            title: 'Business Systems',
+            desc: 'Odoo implementations and custom systems built to fit your business.',
           },
           automation: {
-            title: "Process Automation",
-            description: "Streamline your workflows with custom automation tools that save time and reduce errors."
+            title: 'Process Automation',
+            desc: 'Save time by automating repetitive tasks and connecting your tools.',
           },
           consulting: {
-            title: "Technology Consulting",
-            description: "Strategic guidance on digital transformation, technology stack selection, and system architecture."
+            title: 'Technical Consulting',
+            desc: 'Strategic guidance on technology and making the right decisions.',
           },
-          mobileApps: {
-            title: "Mobile Applications",
-            description: "Native and cross-platform mobile apps that deliver exceptional user experiences."
-          },
-          cloudSolutions: {
-            title: "Cloud Solutions",
-            description: "Scalable cloud infrastructure and migration services for modern, efficient operations."
-          }
-        }
+        },
       },
-      // Footer Section
+      meeting: {
+        eyebrow: 'The Meeting',
+        title: 'A 30-minute conversation that changes how you see your business',
+        subtitle: 'In 30 minutes, you walk away with:',
+        items: [
+          'A clear assessment of your current technical state',
+          '3 practical next steps you can act on immediately',
+          'An honest recommendation — even if we are not the right fit',
+        ],
+        cta: 'Book the Meeting',
+      },
+      process: {
+        eyebrow: 'How We Work',
+        title: 'A process built on clarity',
+        steps: [
+          { num: '01', title: 'Discovery Meeting', desc: 'Free, 30 minutes — we understand your business.' },
+          { num: '02', title: 'Custom Proposal', desc: 'Detailed scope, timeline, and pricing — no obligation.' },
+          { num: '03', title: 'Build & Deliver', desc: 'We build, test, and deploy.' },
+          { num: '04', title: 'Ongoing Support', desc: 'Maintenance and continuous improvement.' },
+        ],
+      },
+      why: {
+        eyebrow: 'Why Royah',
+        title: 'Local context, global standards',
+        items: [
+          { title: 'Deep expertise', desc: "Master's in AI + Bachelor's in Software Engineering" },
+          { title: 'Certified partner', desc: 'Official Odoo Learning Partner' },
+          { title: 'Truly bilingual', desc: 'Arabic and English, both at the same quality' },
+          { title: 'Local context', desc: 'Omani founder serving Omani businesses' },
+        ],
+      },
+      finalCta: {
+        title: 'Ready to start?',
+        subtitle: 'A free 30-minute meeting. No commitment. No pressure.',
+        cta: 'Book Your Meeting Now',
+      },
       footer: {
-        company: "Royah",
-        description: "Empowering businesses across the GCC with innovative digital solutions, strategic consulting, and cutting-edge AI technology.",
-        sections: {
-          services: {
-            title: "Services",
-            items: {
-              webDevelopment: "Web Development",
-              aiIntegration: "AI Solutions",
-              automation: "Process Automation",
-              consulting: "Digital Strategy",
-              mobileApps: "Mobile Apps",
-              cloudSolutions: "Cloud Solutions"
-            }
-          },
-          company: {
-            title: "Company",
-            items: {
-              about: "About Us",
-              process: "Our Process",
-              contact: "Contact",
-              careers: "Careers"
-            }
-          },
-          technologies: {
-            title: "Technologies We Use",
-            description: "We leverage cutting-edge technologies and frameworks to deliver robust, scalable solutions for modern businesses."
-          }
-        },
-        contact: {
-          email: "info@royah.om",
-          phone: "+968 90663136",
-          address: "Muscat, Sultanate of Oman"
-        },
-        copyright: "© 2025 Royah. All rights reserved.",
-        tagline: "Building the future of business technology in the GCC"
-      }
-    }
+        company: 'Royah Advanced Technologies',
+        location: 'Sultanate of Oman • Muscat',
+        email: 'info@royah.om',
+        phone: '+968 90663136',
+        rights: '© 2026 Royah Advanced Technologies. All rights reserved.',
+      },
+    },
   },
   ar: {
     translation: {
-      // Navigation
       nav: {
-        services: "الخدمات",
-        process: "العملية",
-        whyUs: "لماذا نحن",
-        about: "من نحن",
-        contact: "اتصل بنا"
+        howWeHelp: 'كيف نساعدك',
+        meeting: 'الاجتماع',
+        howWeWork: 'كيف نعمل',
+        whyRoyah: 'لماذا رؤية',
+        bookCta: 'احجز اجتماعاً',
       },
-      // Hero Section
       hero: {
-        tagline: "استراتيجية رقمية واستشارات تقنية",
-        headline: "شريكك في النمو الرقمي",
-        subheadline: "نساعدك في تخطيط رحلتك الرقمية، وأتمتة عملياتك، وبناء حلول الذكاء الاصطناعي التي تنمو مع عملك.",
-        cta: {
-          primary: "ابدأ مشروعاً",
-          secondary: "اطلع على خدماتنا"
-        },
-        stats: {
-          projects: "المشاريع",
-          satisfaction: "الرضا",
-          support: "الدعم"
-        },
-        controls: {
-          soundOn: "تشغيل الصوت",
-          soundOff: "إيقاف الصوت"
-        }
+        headline: 'شريكك في التحول الرقمي',
+        subheadline:
+          'نُساعد الشركات في عُمان على بناء أنظمة ذكية، وأتمتة عملياتها، ودمج الذكاء الاصطناعي بطريقة عملية ومدروسة.',
+        cta: 'احجز اجتماعاً مجانياً — ٣٠ دقيقة',
+        languageToggle: 'English',
       },
-      // Services Section
-      services: {
-        title: "تقنية تحل المشاكل الحقيقية",
-        subtitle: "نساعد الشركات في تخطيط رحلتها الرقمية، وأتمتة العمليات، وبناء حلول ذكية تنمو مع أعمالها.",
-        coreService: "خدمة أساسية",
-        learnMore: "اعرف المزيد",
+      capabilities: {
+        eyebrow: 'كيف نساعدك',
+        title: 'خمس قدرات، شراكة واحدة',
+        subtitle: 'نتكيّف مع طبيعة شركتك — سواء كنت تبدأ من الصفر أو تنتقل إلى مرحلة جديدة.',
         items: {
-          digitalStrategy: {
-            title: "الاستراتيجية الرقمية",
-            description: "لست متأكداً من أين تبدأ؟ نساعدك في إنشاء خارطة طريق رقمية واضحة. ما تبنيه، ومتى تبنيه، وكيف.",
-            features: ["خارطة طريق رقمية", "تقييم تقني", "تخطيط الأنظمة", "استراتيجية النمو"]
-          },
-          automation: {
-            title: "أتمتة العمليات",
-            description: "توقف عن إضاعة الوقت في المهام المتكررة. نقوم بأتمتة سير عملك حتى يتمكن فريقك من التركيز على العمل الحقيقي.",
-            features: ["أتمتة سير العمل", "تكامل التطبيقات", "تقارير تلقائية", "أدوات مخصصة"]
+          digital: {
+            title: 'التحول الرقمي',
+            desc: 'تحويل عملك من العمليات اليدوية إلى منصة موحدة وذكية تخدم نمو شركتك.',
           },
           ai: {
-            title: "حلول الذكاء الاصطناعي",
-            description: "ذكاء اصطناعي يعمل حقاً لعملك. روبوتات المحادثة، البحث الذكي، رؤى البيانات، والمزيد.",
-            features: ["روبوتات المحادثة", "تحليل البيانات", "البحث الذكي", "التنبؤات"]
-          }
-        }
-      },
-      // Process Section
-      process: {
-        title: "كيف نبني الحلول",
-        subtitle: "شاهد عمليتنا المجربة تتكشف خطوة بخطوة",
-        steps: {
-          discovery: {
-            title: "الاكتشاف والتحليل",
-            description: "غوص عميق في أهداف عملك واحتياجاتك التقنية"
+            title: 'حلول الذكاء الاصطناعي',
+            desc: 'مساعدون أذكياء، وأتمتة المحادثات، وتحليل البيانات بدقة.',
           },
-          strategy: {
-            title: "الاستراتيجية والتخطيط",
-            description: "إنشاء خارطة طريق مفصلة ومواصفات المشروع"
-          },
-          development: {
-            title: "التطوير والبناء",
-            description: "بناء الحلول باستخدام تقنيات وأطر عمل مجربة"
-          },
-          testing: {
-            title: "الاختبار والتكامل",
-            description: "ضمان الجودة والتكامل السلس للأنظمة"
-          },
-          launch: {
-            title: "الإطلاق والدعم",
-            description: "البدء مع الصيانة المستمرة والتحسين"
-          }
-        },
-        controls: {
-          methodology: "منهجية مجربة",
-          timeline: "1-2 أسبوع",
-          quality: "جودة عالمية"
-        }
-      },
-      // Team/Testimonials Section
-      team: {
-        title: "ماذا يقول عملاؤنا عنا",
-        subtitle: "نتائج حقيقية من شركات حقيقية في المنطقة"
-      },
-      // Contact Section
-      contact: {
-        tagline: "ابدأ رحلتك الرقمية",
-        title: "هل أنت مستعد لتحويل عملك؟",
-        subtitle: "تواصل معنا لمناقشة استراتيجيتك الرقمية واكتشاف كيف يمكننا مساعدتك في تحقيق أهداف عملك",
-        whatsapp: "تحدث عبر واتساب",
-        whatsappDesc: "احصل على ردود فورية لأسئلتك. نحن متاحون خلال ساعات العمل.",
-        whatsappResponse: "يرد عادة فوراً",
-        email: "أرسل إيميل",
-        emailDesc: "استفسارات مفصلة عن المشاريع والتواصل الرسمي.",
-        phone: "اتصل بنا",
-        phoneDesc: "تحدث مباشرة مع فريقنا للأمور العاجلة.",
-        bookCall: "احجز مكالمة",
-        bookCallDesc: "احجز استشارة مجانية لمناقشة مشروعك بالتفصيل.",
-        bookCallResponse: "استشارة مجانية لمدة 30 دقيقة",
-        hours: "ساعات العمل",
-        location: "موقعنا",
-        businessHours: {
-          weekdays: "الأحد - الخميس:",
-          weekdaysTime: "9:00 ص - 6:00 م",
-          weekend: "الجمعة - السبت:",
-          weekendTime: "مغلق",
-          timezone: "GMT+4 (توقيت عُمان)"
-        },
-        locationDetails: {
-          city: "مسقط، سلطنة عُمان",
-          region: "نخدم العملاء في جميع أنحاء دول الخليج",
-          remote: "الاستشارات عن بُعد متاحة"
-        },
-        cta: {
-          title: "مستعد لبدء تحولك الرقمي؟",
-          description: "انضم إلى مئات الشركات التي وثقت بـرؤية لتقديم حلول رقمية استثنائية. دعنا نناقش مشروعك اليوم.",
-          button: "ابدأ محادثة واتساب"
-        }
-      },
-      // Extended Services
-      extendedServices: {
-        title: "الحلول التقنية",
-        subtitle: "مبنية بخبرة، مُسلمة بتميز",
-        description: "كل حل يُصمم بعناية في مختبر التطوير لدينا، مما يضمن أن كل تفصيلة تقدم الأداء والموثوقية التي يتطلبها عملك.",
-        items: {
-          webDevelopment: {
-            title: "تطوير الويب",
-            description: "مواقع ويب وتطبيقات مخصصة مبنية بتقنيات حديثة للحصول على أقصى أداء."
-          },
-          aiIntegration: {
-            title: "تكامل الذكاء الاصطناعي",
-            description: "حلول ذكية تشمل روبوتات المحادثة وتحليل البيانات والأنظمة التنبؤية لعملك."
+          systems: {
+            title: 'أنظمة الأعمال',
+            desc: 'تطبيق Odoo وأنظمة مخصصة تتكيف مع طبيعة شركتك.',
           },
           automation: {
-            title: "أتمتة العمليات",
-            description: "تبسيط سير العمل بأدوات أتمتة مخصصة توفر الوقت وتقلل الأخطاء."
+            title: 'أتمتة العمليات',
+            desc: 'وفّر الوقت بأتمتة المهام المتكررة وربط أدواتك ببعضها.',
           },
           consulting: {
-            title: "استشارات تقنية",
-            description: "إرشاد استراتيجي حول التحول الرقمي واختيار المجموعة التقنية وهيكلة الأنظمة."
+            title: 'الاستشارات التقنية',
+            desc: 'إرشاد استراتيجي حول التقنية واتخاذ القرارات الصحيحة.',
           },
-          mobileApps: {
-            title: "تطبيقات الجوال",
-            description: "تطبيقات جوال أصلية ومتعددة المنصات تقدم تجارب استثنائية للمستخدمين."
-          },
-          cloudSolutions: {
-            title: "حلول سحابية",
-            description: "بنية تحتية سحابية قابلة للتوسع وخدمات هجرة للعمليات الحديثة والفعالة."
-          }
-        }
+        },
       },
-      // Footer Section
+      meeting: {
+        eyebrow: 'الاجتماع',
+        title: 'محادثة لمدة ٣٠ دقيقة تغيّر طريقة رؤيتك لشركتك',
+        subtitle: 'في ٣٠ دقيقة، ستحصل على:',
+        items: [
+          'تقييم واضح لوضع شركتك التقني الحالي',
+          '٣ خطوات عملية تستطيع تطبيقها فوراً',
+          'توصية صادقة — حتى لو لم نكن نحن الحل المناسب',
+        ],
+        cta: 'احجز الاجتماع',
+      },
+      process: {
+        eyebrow: 'كيف نعمل',
+        title: 'منهجية مبنية على الوضوح',
+        steps: [
+          { num: '٠١', title: 'الاجتماع الاستكشافي', desc: 'مجاني، ٣٠ دقيقة — نتعرّف على عملك.' },
+          { num: '٠٢', title: 'عرض مخصّص', desc: 'نطاق وجدول وتكلفة بالتفصيل — دون التزام.' },
+          { num: '٠٣', title: 'التنفيذ والتسليم', desc: 'نبني، نختبر، ونُطلق.' },
+          { num: '٠٤', title: 'الدعم والتحسين', desc: 'صيانة مستمرة وتطوير دائم.' },
+        ],
+      },
+      why: {
+        eyebrow: 'لماذا رؤية',
+        title: 'سياق محلي، معايير عالمية',
+        items: [
+          { title: 'خبرة عميقة', desc: 'ماجستير في الذكاء الاصطناعي + بكالوريوس في هندسة البرمجيات' },
+          { title: 'شريك معتمد', desc: 'شريك تعليمي رسمي في Odoo' },
+          { title: 'ثنائي اللغة بالفطرة', desc: 'العربية والإنجليزية بنفس الجودة' },
+          { title: 'سياق محلي', desc: 'مؤسس عماني يخدم شركات عُمان' },
+        ],
+      },
+      finalCta: {
+        title: 'جاهز للبدء؟',
+        subtitle: 'اجتماع ٣٠ دقيقة مجاني. بدون التزام. بدون ضغط.',
+        cta: 'احجز اجتماعك الآن',
+      },
       footer: {
-        company: "رؤية",
-        description: "تمكين الأعمال في دول مجلس التعاون الخليجي بحلول رقمية مبتكرة واستشارات استراتيجية وتقنيات الذكاء الاصطناعي المتطورة.",
-        sections: {
-          services: {
-            title: "الخدمات",
-            items: {
-              webDevelopment: "تطوير الويب",
-              aiIntegration: "حلول الذكاء الاصطناعي",
-              automation: "أتمتة العمليات",
-              consulting: "الاستراتيجية الرقمية",
-              mobileApps: "تطبيقات الجوال",
-              cloudSolutions: "الحلول السحابية"
-            }
-          },
-          company: {
-            title: "الشركة",
-            items: {
-              about: "من نحن",
-              process: "عمليتنا",
-              contact: "اتصل بنا",
-              careers: "الوظائف"
-            }
-          },
-          technologies: {
-            title: "التقنيات التي نستخدمها",
-            description: "نستخدم أحدث التقنيات والأطر لتقديم حلول قوية وقابلة للتوسع للأعمال الحديثة."
-          }
-        },
-        contact: {
-          email: "info@royah.om",
-          phone: "+968 90663136",
-          address: "مسقط، سلطنة عُمان"
-        },
-        copyright: "© 2025 رؤية. جميع الحقوق محفوظة.",
-        tagline: "بناء مستقبل تكنولوجيا الأعمال في دول الخليج"
-      }
-    }
-  }
+        company: 'رؤية للتقنيات المتقدمة',
+        location: 'سلطنة عُمان • مسقط',
+        email: 'info@royah.om',
+        phone: '+٩٦٨ ٩٠٦٦٣١٣٦',
+        rights: '© ٢٠٢٦ رؤية للتقنيات المتقدمة. جميع الحقوق محفوظة.',
+      },
+    },
+  },
 };
 
 i18n
@@ -419,47 +201,27 @@ i18n
     },
   });
 
-// Normalize regional locale codes (e.g. en-GB → en, ar-SA → ar) so that
-// strict equality checks like `i18n.language === 'ar'` work consistently.
 const base = i18n.language?.split('-')[0];
 if (base && ['en', 'ar'].includes(base) && base !== i18n.language) {
   i18n.changeLanguage(base);
 }
 
-// Update document metadata based on language
 const updateMeta = (lng: string) => {
   const isAr = lng === 'ar';
   document.documentElement.lang = isAr ? 'ar' : 'en';
   document.documentElement.dir = isAr ? 'rtl' : 'ltr';
   document.title = isAr
-    ? 'رؤية - استشارات الاستراتيجية الرقمية والذكاء الاصطناعي'
-    : 'Royah - Digital Strategy & AI Consulting';
+    ? 'رؤية للتقنيات المتقدمة — التحول الرقمي والذكاء الاصطناعي'
+    : 'Royah Advanced Technologies — Digital Transformation & AI';
 
   const metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) {
-    metaDesc.setAttribute('content', isAr
-      ? 'حوّل أعمالك مع خدمات رؤية للاستشارات الرقمية وأتمتة العمليات وحلول الذكاء الاصطناعي. نخدم العملاء في منطقة الخليج.'
-      : 'Transform your business with Royah\'s digital strategy consulting, process automation, and AI integration services. Serving clients across the GCC region.');
-  }
-
-  const ogTitle = document.querySelector('meta[property="og:title"]');
-  if (ogTitle) ogTitle.setAttribute('content', document.title);
-  const twTitle = document.querySelector('meta[name="twitter:title"]');
-  if (twTitle) twTitle.setAttribute('content', document.title);
-
-  const ogDesc = document.querySelector('meta[property="og:description"]');
-  const twDesc = document.querySelector('meta[name="twitter:description"]');
-  const desc = metaDesc?.getAttribute('content') || '';
-  if (ogDesc) ogDesc.setAttribute('content', desc);
-  if (twDesc) twDesc.setAttribute('content', desc);
-
-  // Update canonical URL based on language
-  const canonical = document.querySelector('link[rel="canonical"]');
-  if (!canonical) {
-    const link = document.createElement('link');
-    link.rel = 'canonical';
-    link.href = isAr ? 'https://www.royah.om/ar' : 'https://www.royah.om/';
-    document.head.appendChild(link);
+    metaDesc.setAttribute(
+      'content',
+      isAr
+        ? 'نُساعد الشركات في عُمان على بناء أنظمة ذكية، وأتمتة عملياتها، ودمج الذكاء الاصطناعي.'
+        : 'We help businesses in Oman build smart systems, automate operations, and integrate AI.'
+    );
   }
 };
 

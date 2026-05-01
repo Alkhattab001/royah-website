@@ -1,339 +1,135 @@
-import { motion } from 'framer-motion'
-import { Volume2, VolumeX, Menu, X, Globe } from 'lucide-react'
-import { useState, useRef, useEffect } from 'react'
+import { Suspense, lazy, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { LanguageSwitcher } from './LanguageSwitcher'
+import { motion } from 'framer-motion'
+import { Globe, Calendar } from 'lucide-react'
 
-export function Hero() {
-  const [isMuted, setIsMuted] = useState(true)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const audioRef = useRef<HTMLAudioElement>(null)
+// Lazy-load Spline so it doesn't block initial paint
+const Spline = lazy(() => import('@splinetool/react-spline'))
+
+// Default Spline scene URL — swap with your own scene from spline.design.
+// This one is a public free robot from Spline community.
+const SPLINE_SCENE = 'https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode'
+
+export function Hero({ onBookClick }: { onBookClick: () => void }) {
   const { t, i18n } = useTranslation()
   const isRTL = i18n.language === 'ar'
+  const [splineLoaded, setSplineLoaded] = useState(false)
 
-  // Scroll detection
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY
-      setIsScrolled(scrollTop > 50) // Show background after 50px scroll
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  // Keep video always muted, autoplay silently
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.volume = 0
-      videoRef.current.muted = true
-      videoRef.current.defaultMuted = true
-      videoRef.current.play().catch(() => {})
-    }
-  }, [])
-
-  // Background music: play/pause based on mute toggle
-  useEffect(() => {
-    if (!audioRef.current) return
-    if (isMuted) {
-      audioRef.current.pause()
-    } else {
-      audioRef.current.volume = 0.4
-      audioRef.current.play().catch(() => {})
-    }
-  }, [isMuted])
-
-  // Handle body scroll lock when mobile menu is open
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
-
-    // Cleanup on unmount
-    return () => {
-      document.body.style.overflow = 'unset'
-    }
-  }, [isMobileMenuOpen])
-
-  // Close mobile menu on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      if (isMobileMenuOpen) {
-        setIsMobileMenuOpen(false)
-      }
-    }
-
-    if (isMobileMenuOpen) {
-      window.addEventListener('scroll', handleScroll)
-    }
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [isMobileMenuOpen])
-
-
+  const toggleLanguage = () => {
+    const newLanguage = i18n.language?.startsWith('ar') ? 'en' : 'ar'
+    i18n.changeLanguage(newLanguage)
+    window.history.replaceState(null, '', newLanguage === 'ar' ? '/ar' : '/')
+  }
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-black">
-      {/* MASSIVE VIDEO - Takes up 95% of space */}
-      <video
-        ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover scale-110"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-      >
-        <source src="https://videos.pexels.com/video-files/6963744/6963744-hd_1920_1080_25fps.mp4" type="video/mp4" />
-        <source src="https://videos.pexels.com/video-files/3130284/3130284-uhd_2560_1440_30fps.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+    <section className="relative min-h-screen w-full overflow-hidden bg-background">
+      {/* Soft gradient backdrop */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(194,65,12,0.08),transparent_60%),radial-gradient(ellipse_at_bottom_left,rgba(45,90,61,0.06),transparent_60%)]"
+      />
 
-      {/* Background Music */}
-      <audio ref={audioRef} loop preload="none" src="/ambient-bg.mp3" />
+      {/* Top navigation */}
+      <nav className="relative z-20 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-12">
+        <a href="/" className="flex items-center gap-3">
+          <img src="/royahicone.svg" alt="Royah" className="h-9 w-9" />
+          <span
+            className="text-xl font-semibold tracking-tight text-foreground"
+            style={{ fontFamily: isRTL ? 'var(--font-arabic-display)' : 'var(--font-english-display)' }}
+          >
+            {isRTL ? 'رؤية' : 'Royah'}
+          </span>
+        </a>
 
-      {/* Full-Width Navbar */}
-      <motion.nav
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-        className="fixed top-0 left-0 right-0 w-full z-[110]"
-      >
-        <div
-          className={`w-full px-6 sm:px-8 lg:px-12 py-2 transition-all duration-300 ease-out ${
-            isScrolled
-              ? 'bg-black/80 backdrop-blur-xl border-b border-white/10'
-              : 'bg-transparent'
-          }`}
-        >
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center cursor-pointer"
-              onClick={() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' })
-              }}
-            >
-              <img
-                src="/royah-logo-real.png"
-                alt="Royah Logo"
-                className="w-24 h-14 object-contain"
-              />
-            </motion.div>
-
-            {/* Navigation Menu */}
-            <div className="hidden md:flex items-center space-x-8">
-              <a
-                href="#services"
-                className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105"
-              >
-                {t('nav.services')}
-              </a>
-              <a
-                href="#about"
-                className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105"
-              >
-                {t('nav.process')}
-              </a>
-              <a
-                href="#portfolio"
-                className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105"
-              >
-                {t('nav.whyUs')}
-              </a>
-              <a
-                href="#contact"
-                className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105"
-              >
-                {t('nav.contact')}
-              </a>
-              <LanguageSwitcher />
-            </div>
-
-            {/* Right Side - Video Controls + Language Switcher + CTA + Mobile Menu */}
-            <div className="flex items-center space-x-3 relative">
-              {/* Mobile Language Switcher - Only show on mobile */}
-              <div className="md:hidden relative">
-                <button
-                  onClick={() => {
-                    const newLanguage = i18n.language?.startsWith('ar') ? 'en' : 'ar'
-                    i18n.changeLanguage(newLanguage)
-                    document.documentElement.dir = newLanguage === 'ar' ? 'rtl' : 'ltr'
-                    document.documentElement.lang = newLanguage
-                    document.body.classList.toggle('rtl-mode', newLanguage === 'ar')
-                    window.history.replaceState(null, '', newLanguage === 'ar' ? '/ar' : '/')
-                  }}
-                  className="glass-effect p-3 rounded-full text-white hover:bg-white/20 gentle-animation cursor-pointer"
-                  aria-label="Switch Language"
-                >
-                  <Globe className="w-4 h-4" />
-                </button>
-              </div>
-
-              {/* Video Controls with Sound On indicator */}
-              <div className="relative">
-                <button
-                  onClick={() => setIsMuted(!isMuted)}
-                  className="glass-effect p-3 rounded-full text-white hover:bg-white/20 gentle-animation cursor-pointer"
-                  aria-label={isMuted ? t('hero.controls.soundOn') : t('hero.controls.soundOff')}
-                  aria-pressed={!isMuted}
-                >
-                  {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                </button>
-
-                {/* Sound On indicator - only show when muted */}
-                {isMuted && (
-                  <div className="absolute -bottom-10 right-0 flex items-center text-white/80">
-                    <span className="whitespace-nowrap font-medium text-sm mr-2">{t('hero.controls.soundOn')}</span>
-                    <span className="text-lg">↗</span>
-                  </div>
-                )}
-              </div>
-              
-              {/* CTA Button - Hidden on mobile */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  const contactSection = document.getElementById('contact')
-                  contactSection?.scrollIntoView({ behavior: 'smooth' })
-                }}
-                className="hidden sm:block bg-red-600 backdrop-blur-sm text-white font-semibold px-6 py-3 rounded-md hover:bg-red-700 gentle-animation ml-4 cursor-pointer"
-              >
-                {t('hero.cta.primary')}
-              </motion.button>
-
-              {/* Mobile Hamburger Menu Button */}
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="md:hidden glass-effect p-3 rounded-full text-white hover:bg-white/20 active:bg-white/30 gentle-animation cursor-pointer z-[120] relative"
-                aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-                aria-expanded={isMobileMenuOpen}
-              >
-                {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
-            </div>
-          </div>
+        <div className="hidden items-center gap-8 md:flex">
+          <a href="#capabilities" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            {t('nav.howWeHelp')}
+          </a>
+          <a href="#meeting" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            {t('nav.meeting')}
+          </a>
+          <a href="#process" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            {t('nav.howWeWork')}
+          </a>
+          <a href="#why" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            {t('nav.whyRoyah')}
+          </a>
         </div>
-      </motion.nav>
 
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
+        <div className="flex items-center gap-3">
+          <button
+            onClick={toggleLanguage}
+            className="flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            aria-label="Switch Language"
+          >
+            <Globe className="h-3.5 w-3.5" />
+            <span>{t('hero.languageToggle')}</span>
+          </button>
+          <button
+            onClick={onBookClick}
+            className="hidden rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all hover:opacity-90 sm:inline-flex"
+          >
+            {t('nav.bookCta')}
+          </button>
+        </div>
+      </nav>
+
+      {/* Hero content grid */}
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 pb-24 pt-12 lg:grid-cols-2 lg:gap-8 lg:px-12 lg:pt-20">
+        {/* Left — text */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="md:hidden fixed inset-0 bg-black/50 backdrop-blur-md z-[80] cursor-pointer"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
-
-      {/* Mobile Menu Panel */}
-      <motion.div
-        initial={{ x: '100%' }}
-        animate={{ x: isMobileMenuOpen ? '0%' : '100%' }}
-        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        className="md:hidden fixed top-0 right-0 h-full w-72 max-w-[85vw] bg-black/90 backdrop-blur-xl border-l border-white/10 z-[90] mobile-menu-panel pointer-events-auto"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex flex-col h-full">
-          {/* Close Button at the top */}
-          <div className="flex justify-end p-4">
-            <button
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="glass-effect p-3 rounded-full text-white hover:bg-white/20 active:bg-white/30 gentle-animation cursor-pointer"
-              aria-label="Close menu"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-          
-          <div className="flex flex-col px-6 pb-6 h-full">
-            {/* Mobile Navigation Links */}
-            <div className="flex flex-col space-y-4 text-white">
-              <a
-                href="#services"
-                className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg active:bg-white/20"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {t('nav.services')}
-              </a>
-              <a
-                href="#about"
-                className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg active:bg-white/20"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {t('nav.process')}
-              </a>
-              <a
-                href="#portfolio"
-                className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg active:bg-white/20"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {t('nav.whyUs')}
-              </a>
-              <a
-                href="#contact"
-                className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg active:bg-white/20"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {t('nav.contact')}
-              </a>
-              <div className="mt-4 px-4">
-                <LanguageSwitcher />
-              </div>
-            </div>
-
-            {/* Mobile CTA Button */}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => {
-                const contactSection = document.getElementById('contact')
-                contactSection?.scrollIntoView({ behavior: 'smooth' })
-                setIsMobileMenuOpen(false)
-              }}
-              className="bg-red-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-red-700 active:bg-red-800 gentle-animation mt-8 cursor-pointer"
-            >
-              {t('hero.cta.primary')}
-            </motion.button>
-          </div>
-        </div>
-      </motion.div>
-
-
-
-      {/* Big Studio Title - Lower Left */}
-      <motion.div
-        initial={{ opacity: 0, x: isRTL ? 50 : -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, delay: 1.5 }}
-        className={`absolute bottom-12 z-40 ${isRTL ? 'right-6 sm:right-8 lg:right-12' : 'left-6 sm:left-8 lg:left-12'}`}
-      >
-        <div className="max-w-2xl">
-          <h1 className={`text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight text-white ${isRTL ? 'text-right hero-title' : 'text-left'}`}>
-            {t('hero.tagline')}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className={isRTL ? 'lg:order-2 lg:text-right' : 'lg:order-1'}
+        >
+          <h1
+            className="text-balance text-5xl leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl"
+            style={{
+              fontFamily: isRTL ? 'var(--font-arabic-display)' : 'var(--font-english-display)',
+              fontWeight: isRTL ? 600 : 400,
+            }}
+          >
+            {t('hero.headline')}
           </h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 2 }}
-            className={`text-lg sm:text-xl text-white/90 mt-6 max-w-xl leading-relaxed ${isRTL ? 'text-right hero-subtitle' : 'text-left'}`}
+
+          <p
+            className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground sm:text-xl"
+            style={{ fontFamily: isRTL ? 'var(--font-arabic-body)' : 'var(--font-english-body)' }}
           >
             {t('hero.subheadline')}
-          </motion.p>
-        </div>
-      </motion.div>
+          </p>
 
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <button
+              onClick={onBookClick}
+              className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-base font-medium text-primary-foreground transition-all hover:opacity-90"
+            >
+              <Calendar className="h-4 w-4" />
+              <span>{t('hero.cta')}</span>
+            </button>
+          </div>
+        </motion.div>
 
-    </div>
+        {/* Right — Spline 3D robot */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: splineLoaded ? 1 : 0, scale: splineLoaded ? 1 : 0.95 }}
+          transition={{ duration: 1.2, ease: 'easeOut' }}
+          className={`relative h-[400px] w-full lg:h-[600px] ${isRTL ? 'lg:order-1' : 'lg:order-2'}`}
+        >
+          {/* Skeleton placeholder while Spline loads */}
+          {!splineLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="h-64 w-64 animate-pulse rounded-full bg-secondary opacity-40 sm:h-80 sm:w-80" />
+            </div>
+          )}
+
+          <Suspense fallback={null}>
+            <Spline scene={SPLINE_SCENE} onLoad={() => setSplineLoaded(true)} />
+          </Suspense>
+        </motion.div>
+      </div>
+    </section>
   )
 }
