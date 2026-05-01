@@ -13,9 +13,10 @@ export function Footer() {
         <div className="grid gap-10 lg:grid-cols-3">
           <div>
             <img
-              src="/royah-logo-black.png"
+              src="/royah-logo-padded.png"
               alt="Royah Advanced Technologies"
               className="h-10 w-auto"
+              style={{ filter: 'invert(1)' }}
             />
             <p className="mt-4 text-sm text-muted-foreground" style={{ fontFamily: bodyFont }}>
               {t('footer.company')}

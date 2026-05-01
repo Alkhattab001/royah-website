@@ -33,9 +33,10 @@ export function Hero({ onBookClick }: { onBookClick: () => void }) {
       <nav className="relative z-20 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-12">
         <a href="/" className="flex items-center" aria-label="Royah">
           <img
-            src="/royah-logo-black.png"
+            src="/royah-logo-padded.png"
             alt="Royah"
-            className="h-9 w-auto"
+            className="h-10 w-auto"
+            style={{ filter: 'invert(1)' }}
           />
         </a>
 
